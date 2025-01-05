@@ -2,7 +2,7 @@
 
 <template>
   <header
-    class="w-[500px] h-[60px] fixed top-0 flex justify-between items-center px-5"
+    class="w-[500px] h-[60px] absolute top-0 z-10 flex justify-between items-center px-5 bg-white"
   >
     <div>
       <img src="@/assets/img/logo.png" alt="" class="h-[30px]" />
