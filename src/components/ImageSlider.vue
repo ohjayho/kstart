@@ -89,7 +89,7 @@ onUnmounted(() => {
 <template>
   <div class="slider-wrapper relative w-[500px] h-[390px]">
     <div
-      class="slider w-full h-full overflow-hidden overflow-x-scroll"
+      class="slider w-full h-full overflow-hidden overflow-x-scroll no-scrollbar"
       ref="slider"
       @mousedown="onMousedown"
       @mousemove="onMousemove"
