@@ -30,6 +30,7 @@ function getImageUrl(src) {
   >
     <button
       v-for="btn in navBtns"
+      :key="btn"
       class="w-1/4 h-full flex flex-col items-center justify-center"
     >
       <img :src="getImageUrl(btn.src)" :alt="btn.name" class="w-6 m-1" />
