@@ -5,7 +5,7 @@ register();
 </script>
 
 <template>
-  <div class="pt-[70px] pb-[60px]">
+  <div class="pt-[60px] pb-[70px]">
     <!-- <ImageSlider /> -->
     <swiper-container
       pagination="true"
@@ -18,13 +18,19 @@ register();
       "
     >
       <swiper-slide>
-        <img src="@/assets/img/sliderImg/first.png" alt="First Image" />
+        <a href="https://support.kstart.co.kr/ko" target="_blank">
+          <img src="@/assets/img/sliderImg/first.png" alt="First Image" />
+        </a>
       </swiper-slide>
       <swiper-slide>
-        <img src="@/assets/img/sliderImg/second.png" alt="Second Image" />
+        <a href="https://support.kstart.co.kr/ko" target="_blank">
+          <img src="@/assets/img/sliderImg/second.png" alt="Second Image" />
+        </a>
       </swiper-slide>
       <swiper-slide>
-        <img src="@/assets/img/sliderImg/third.png" alt="Third Image" />
+        <a href="https://support.kstart.co.kr/ko" target="_blank">
+          <img src="@/assets/img/sliderImg/third.png" alt="Third Image" />
+        </a>
       </swiper-slide>
     </swiper-container>
   </div>
