@@ -1,24 +1,39 @@
-<script setup></script>
+<script setup>
+const navBtns = [
+  {
+    name: "Main",
+    src: "src/assets/img/navbar/main.png"
+  },
+  {
+    name: "Community",
+    src: "src/assets/img/navbar/community.png"
+  },
+  {
+    name: "Benefit",
+    src: "src/assets/img/navbar/benefit.png"
+  },
+  {
+    name: "Setting",
+    src: "src/assets/img/navbar/setting.png"
+  }
+];
+
+function getImageUrl(src) {
+  const baseUrl = window.location.origin;
+  return new URL(src, baseUrl).href;
+}
+</script>
 
 <template>
   <footer
-    class="w-[500px] h-[70px] flex absolute bottom-0 border-t border-[#dadce0] bg-white"
+    class="w-[500px] h-[70px] flex absolute bottom-0 border-t border-[#dadce0] bg-white z-10"
   >
-    <button class="w-1/4 h-full flex flex-col items-center justify-center">
-      <img src="@/assets/img/navbar/main.png" alt="" class="w-6 m-1" />
-      <span class="text-xs">Main</span>
-    </button>
-    <button class="w-1/4 h-full flex flex-col items-center justify-center">
-      <img src="@/assets/img/navbar/benefit.png" alt="" class="w-6 m-1" />
-      <span class="text-xs">Benefit</span>
-    </button>
-    <button class="w-1/4 h-full flex flex-col items-center justify-center">
-      <img src="@/assets/img/navbar/inbox.png" alt="" class="w-6 m-1" />
-      <span class="text-xs">Inbox</span>
-    </button>
-    <button class="w-1/4 h-full flex flex-col items-center justify-center">
-      <img src="@/assets/img/navbar/setting.png" alt="" class="w-6 m-1" />
-      <span class="text-xs">Setting</span>
+    <button
+      v-for="btn in navBtns"
+      class="w-1/4 h-full flex flex-col items-center justify-center"
+    >
+      <img :src="getImageUrl(btn.src)" :alt="btn.name" class="w-6 m-1" />
+      <span class="text-xs">{{ btn.name }}</span>
     </button>
   </footer>
 </template>
