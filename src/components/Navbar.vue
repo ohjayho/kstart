@@ -1,27 +1,28 @@
 <script setup>
+import { getImageUrl } from "@/utils/getImageUrl";
+import { useRoute } from "vue-router";
 const navBtns = [
   {
-    name: "Main",
-    src: "src/assets/img/navbar/main.png"
+    name: "main",
+    route: "/"
   },
   {
-    name: "Community",
-    src: "src/assets/img/navbar/community.png"
+    name: "community",
+    route: "/community"
   },
   {
-    name: "Benefit",
-    src: "src/assets/img/navbar/benefit.png"
+    name: "benefit",
+    route: "/benefit"
   },
   {
-    name: "Setting",
-    src: "src/assets/img/navbar/setting.png"
+    name: "setting",
+    route: "/setting"
   }
 ];
-
-function getImageUrl(src) {
-  const baseUrl = window.location.origin;
-  return new URL(src, baseUrl).href;
-}
+const isActiveLink = (routePath) => {
+  const route = useRoute();
+  return route.path === routePath;
+};
 </script>
 
 <template>
@@ -33,8 +34,23 @@ function getImageUrl(src) {
       :key="btn"
       class="w-1/4 h-full flex flex-col items-center justify-center"
     >
-      <img :src="getImageUrl(btn.src)" :alt="btn.name" class="w-6 m-1" />
-      <span class="text-xs">{{ btn.name }}</span>
+      <img
+        :src="
+          getImageUrl(
+            `src/assets/img/navbar/${isActiveLink(btn.route) ? 'clicked' : ''}${
+              btn.name
+            }.png`
+          )
+        "
+        :alt="btn.name"
+        class="w-6 m-1"
+      />
+      <span
+        :class="`text-xs capitalize ${
+          isActiveLink(btn.route) ? 'text-[#2760ed]' : ''
+        }`"
+        >{{ btn.name }}</span
+      >
     </button>
   </footer>
 </template>
