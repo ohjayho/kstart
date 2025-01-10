@@ -1,22 +1,18 @@
 <script setup>
-const btns = ["community", "support_cetner", "shopping", "application_form"];
-
-const getImageUrl = (src) => {
-  const baseUrl = window.location.origin;
-  return new URL(src, baseUrl).href;
-};
+import { getImageUrl } from "@/utils/getImageUrl";
+const btns = ["community", "support", "shopping", "application_form"];
 </script>
 
 <template>
-  <section>
-    <ul>
+  <section class="pb-[30px]">
+    <ul class="w-full flex justify-between px-5">
       <li v-for="btn in btns" :key="btn">
-        <button>
+        <button class="flex flex-col items-center">
           <img
             :src="getImageUrl(`src/assets/img/mainBtns/icon_${btn}.png`)"
             alt="btn"
           />
-          <span>{{ btn }}</span>
+          <span class="capitalize text-xs">{{ btn.replace("_", " ") }}</span>
         </button>
       </li>
     </ul>
