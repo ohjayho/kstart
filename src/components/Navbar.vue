@@ -27,7 +27,7 @@ const isActiveLink = (routePath) => {
 
 <template>
   <footer
-    class="w-[500px] h-[70px] flex absolute bottom-0 border-t border-[#dadce0] bg-white z-10"
+    class="w-[500px] h-[70px] flex fixed bottom-0 border-t border-[#dadce0] bg-white z-10"
   >
     <button
       v-for="btn in navBtns"
