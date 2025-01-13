@@ -1,4 +1,5 @@
 <script setup>
+import AdsSlider from "./AdsSlider.vue";
 import ImageSlider from "./ImageSlider.vue";
 import MainButtons from "./MainButtons.vue";
 import ShoppingSlider from "./ShoppingSlider.vue";
@@ -9,5 +10,6 @@ import ShoppingSlider from "./ShoppingSlider.vue";
     <!-- <ImageSlider /> -->
     <MainButtons />
     <ShoppingSlider />
+    <AdsSlider />
   </div>
 </template>
