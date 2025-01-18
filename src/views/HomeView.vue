@@ -6,5 +6,4 @@ import MainSlider from "@/components/MainSlider.vue";
 <template>
   <MainSlider />
   <MainSection />
-  <Navbar />
 </template>
