@@ -29,9 +29,10 @@ const isActiveLink = (routePath) => {
   <footer
     class="w-[500px] h-[70px] flex fixed bottom-0 border-t border-[#dadce0] bg-white z-10"
   >
-    <button
+    <RouterLink
       v-for="btn in navBtns"
       :key="btn"
+      :to="btn.route"
       class="w-1/4 h-full flex flex-col items-center justify-center"
     >
       <img
@@ -51,6 +52,6 @@ const isActiveLink = (routePath) => {
         }`"
         >{{ btn.name }}</span
       >
-    </button>
+    </RouterLink>
   </footer>
 </template>
