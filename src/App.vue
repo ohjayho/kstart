@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar.vue";
 
 <template>
   <div class="flex justify-center h-full">
-    <div class="max-w-[500px] h-full">
+    <div class="w-[500px] h-full">
       <MainHeader />
       <RouterView />
       <Navbar />
