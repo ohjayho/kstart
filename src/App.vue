@@ -1,13 +1,11 @@
 <script setup>
 import { RouterView } from "vue-router";
-import MainHeader from "./components/MainHeader.vue";
 import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
   <div class="flex justify-center h-full">
-    <div class="w-[500px] h-full">
-      <MainHeader />
+    <div class="w-[500px] max-w-full h-full">
       <RouterView />
       <Navbar />
     </div>
