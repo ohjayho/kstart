@@ -50,7 +50,7 @@ const items = [
 </script>
 
 <template>
-  <div class="px-5 mb-[30px]">
+  <div class="px-4 mb-[30px]">
     <button class="w-14 flex justify-between items-center">
       <span class="text-xl font-semibold">쇼핑</span>
       <img
