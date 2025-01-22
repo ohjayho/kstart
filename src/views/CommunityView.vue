@@ -1,5 +1,9 @@
-<script setup></script>
+<script setup>
+import CommunityCategories from "@/components/CommunityCategories.vue";
+import SearchBar from "@/components/SearchBar.vue";
+</script>
 
 <template>
-  <p>hello</p>
+  <SearchBar />
+  <CommunityCategories />
 </template>
