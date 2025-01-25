@@ -1,11 +1,11 @@
 <script setup>
-import MainHeader from "@/components/MainHeader.vue";
-import MainSection from "@/components/MainSection.vue";
-import MainSlider from "@/components/MainSlider.vue";
+import HomeHeader from "@/components/home/HomeHeader.vue";
+import HomeSection from "@/components/home/HomeSection.vue";
+import HomeSlider from "@/components/home/HomeSlider.vue";
 </script>
 
 <template>
-  <MainHeader />
-  <MainSlider />
-  <MainSection />
+  <HomeHeader />
+  <HomeSlider />
+  <HomeSection />
 </template>

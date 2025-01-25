@@ -1,7 +1,7 @@
 <script setup>
-import CommunityCategories from "@/components/CommunityCategories.vue";
-import CommunityPost from "@/components/CommunityPost.vue";
-import SearchBar from "@/components/SearchBar.vue";
+import CommunityCategories from "@/components/community/CommunityCategories.vue";
+import CommunityPost from "@/components/community/CommunityPost.vue";
+import SearchBar from "@/components/community/SearchBar.vue";
 </script>
 
 <template>
