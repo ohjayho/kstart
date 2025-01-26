@@ -1,3 +1,4 @@
+import BenefitView from "@/views/BenefitView.vue";
 import CommunityView from "@/views/CommunityView.vue";
 import HomeView from "@/views/HomeView.vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/community",
       name: "community",
       component: CommunityView
+    },
+    {
+      path: "/benefit",
+      name: "benefit",
+      component: BenefitView
     }
   ]
 });
