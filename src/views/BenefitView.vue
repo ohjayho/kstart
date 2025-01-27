@@ -1,12 +1,16 @@
 <script setup>
 import Benefit from "@/components/benefit/Benefit.vue";
 import BenefitHeader from "@/components/benefit/BenefitHeader.vue";
+import BenefitImage from "@/components/benefit/BenefitImage.vue";
+import MoreBenefit from "@/components/benefit/MoreBenefit.vue";
+import Header from "@/components/Header.vue";
 </script>
 
 <template>
-  <div class="benefit-background bg-[#2760ee] pt-20 h-full min-h-full -z-20">
+  <Header />
+  <div class="benefit-background bg-[#2760ee] pt-10 h-full min-h-full -z-20">
     <div
-      class="benefits-container h-full flex flex-col items-center px-5 rounded-2xl bg-white overflow-y-scroll no-scrollbar pb-[110px]"
+      class="benefits-container flex flex-col items-center px-5 rounded-2xl bg-[#f4f7fb] pb-[110px]"
     >
       <BenefitHeader />
       <Benefit />
@@ -20,6 +24,8 @@ import BenefitHeader from "@/components/benefit/BenefitHeader.vue";
           여러분에게 힘이 되겠습니다.
         </p>
       </div>
+      <MoreBenefit />
+      <BenefitImage />
     </div>
   </div>
 </template>
