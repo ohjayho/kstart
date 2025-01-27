@@ -33,7 +33,7 @@ const isActiveLink = (routePath) => {
       v-for="btn in navBtns"
       :key="btn"
       :to="btn.route"
-      class="w-1/4 h-full flex flex-col items-center justify-center"
+      class="w-1/4 h-full flex flex-col items-center justify-center hover:bg-[#f5f7fa]"
     >
       <img
         :src="
