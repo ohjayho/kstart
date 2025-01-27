@@ -14,19 +14,19 @@ const btns = [
 <template>
   <section class="pb-[30px]">
     <ul class="w-full flex justify-between px-5">
-      <li key="community">
+      <li class="w-[97px]" key="community">
         <RouterLink class="flex flex-col items-center" to="/community">
           <img src="@/assets/img/mainBtns/icon_community.png" alt="btn" />
           <span class="capitalize text-xs">Community</span>
         </RouterLink>
       </li>
-      <li v-for="btn in btns" :key="btn">
+      <li v-for="btn in btns" :key="btn" class="w-[97px]">
         <a class="flex flex-col items-center" :href="btn.link" target="_blank">
           <img
             :src="getImageUrl(`src/assets/img/mainBtns/icon_${btn.name}.png`)"
             alt="btn"
           />
-          <span class="capitalize text-xs">{{
+          <span class="capitalize text-xs text-center">{{
             btn.name.replace("_", " ")
           }}</span>
         </a>
