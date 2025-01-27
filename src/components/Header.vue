@@ -1,14 +1,15 @@
 <script setup>
-import NewBadge from "../NewBadge.vue";
+import { RouterLink } from "vue-router";
+import NewBadge from "./NewBadge.vue";
 </script>
 
 <template>
   <header
-    class="w-[500px] max-w-full h-[60px] fixed top-0 z-10 flex justify-between items-center px-5 bg-white"
+    class="w-[500px] max-w-full h-[60px] fixed top-0 z-20 flex justify-between items-center px-5 bg-white"
   >
-    <div>
+    <RouterLink to="/">
       <img src="@/assets/img/header/logo.png" alt="" class="h-[30px]" />
-    </div>
+    </RouterLink>
     <div class="flex">
       <button class="flex justify-between items-center mr-3 relative">
         <img src="@/assets/img/header/inbox.png" alt="btn_inbox" class="w-7" />
