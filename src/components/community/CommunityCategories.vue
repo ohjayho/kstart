@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import NewBadge from "../NewBadge.vue";
 
 const categories = [
   "All",
@@ -30,11 +31,7 @@ const onClick = (category) => {
       @click="onClick(category)"
     >
       {{ category }}
-      <span
-        v-if="category === 'Photo Contest'"
-        class="absolute bg-[#dc3243] -top-2 -left-1 rounded-full w-5 h-5 text-white font-extralight"
-        >N</span
-      >
+      <NewBadge v-if="category === 'Photo Contest'" class="-left-1 w-5 h-5" />
     </button>
     <div class="posts-container">
       <div class="post-header"></div>
