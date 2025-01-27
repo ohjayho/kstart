@@ -1,6 +1,7 @@
 import BenefitView from "@/views/BenefitView.vue";
 import CommunityView from "@/views/CommunityView.vue";
 import HomeView from "@/views/HomeView.vue";
+import SettingView from "@/views/SettingView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/benefit",
       name: "benefit",
       component: BenefitView
+    },
+    {
+      path: "/setting",
+      name: "setting",
+      component: SettingView
     }
   ]
 });
