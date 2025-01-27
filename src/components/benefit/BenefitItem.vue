@@ -3,7 +3,8 @@ import { ref, Transition } from "vue";
 
 defineProps({
   title: String,
-  description: Array
+  description: Array,
+  img: String
 });
 const show = ref(true);
 const onClick = (e) => {
@@ -16,11 +17,7 @@ const onClick = (e) => {
   <div class="benefit-item w-full max-w-[335px] px-5 py-2 rounded-xl">
     <div class="benefit-title flex items-center justify-between">
       <div class="benefit-title-left flex items-center">
-        <img
-          src="@/assets/img/benefit/benefit-shopping.png"
-          alt="benefit-shopping"
-          class="w-[55px] mr-2"
-        />
+        <img :src="img" alt="benefit-shopping" class="w-[55px] mr-3" />
         <span>{{ title }}</span>
       </div>
       <span class="text-2xl transition-transform rotate-45" @click="onClick"
