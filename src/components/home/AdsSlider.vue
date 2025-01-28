@@ -6,7 +6,7 @@ const ads = [1, 2, 3];
   <swiper-container
     class="px-5 mb-[30px]"
     pagination="true"
-    autoplay-delay="2000"
+    autoplay-delay="3000"
     loop="{}"
     disable-on-interaction="false"
     style="
