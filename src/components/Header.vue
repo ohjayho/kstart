@@ -11,10 +11,13 @@ import NewBadge from "./NewBadge.vue";
       <img src="@/assets/img/header/logo.png" alt="" class="h-[30px]" />
     </RouterLink>
     <div class="flex">
-      <button class="flex justify-between items-center mr-3 relative">
+      <RouterLink
+        to="/inbox"
+        class="flex justify-between items-center mr-3 relative"
+      >
         <img src="@/assets/img/header/inbox.png" alt="btn_inbox" class="w-7" />
         <NewBadge class="w-3 h-3 text-[0.6rem] top-0 -right-0" />
-      </button>
+      </RouterLink>
       <button>
         <img src="@/assets/img/header/ko.png" alt="" class="h-[28px]" />
       </button>
