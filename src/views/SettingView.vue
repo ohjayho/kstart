@@ -8,13 +8,13 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
   <div class="setting-container pt-[90px] pb-[120px] px-4 flex flex-col gap-5">
     <div class="user-container flex items-center">
       <img
-        src="@/assets/img/setting/user-picture.png"
+        src="/img/setting/user-picture.png"
         alt="user-picture"
         class="w-14 h-14 rounded-full mr-3"
       />
       <div class="user-name mr-3 text-lg h-full">오재호</div>
       <button class="user-edit">
-        <img src="@/assets/img/setting/user-edit.png" alt="" class="w-6" />
+        <img src="/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
     </div>
     <div class="setting-container flex flex-col gap-3">
@@ -31,38 +31,22 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
       <h1>My Activity</h1>
       <button class="btn">
         <span>나의 커뮤니티</span>
-        <img
-          src="@/assets/img/rightArrow.png"
-          class="w-[14px]"
-          alt="rightArrowImg"
-        />
+        <img src="/img/rightArrow.png" class="w-[14px]" alt="rightArrowImg" />
       </button>
       <button class="btn">
         <span>나의 쇼핑</span>
-        <img
-          src="@/assets/img/rightArrow.png"
-          class="w-[14px]"
-          alt="rightArrowImg"
-        />
+        <img src="/img/rightArrow.png" class="w-[14px]" alt="rightArrowImg" />
       </button>
     </div>
     <div class="about-container flex flex-col gap-3">
       <h1>About Service</h1>
       <button class="btn">
         <span>공지사항</span>
-        <img
-          src="@/assets/img/rightArrow.png"
-          class="w-[14px]"
-          alt="rightArrowImg"
-        />
+        <img src="/img/rightArrow.png" class="w-[14px]" alt="rightArrowImg" />
       </button>
       <button class="btn">
         <span>약관</span>
-        <img
-          src="@/assets/img/rightArrow.png"
-          class="w-[14px]"
-          alt="rightArrowImg"
-        />
+        <img src="/img/rightArrow.png" class="w-[14px]" alt="rightArrowImg" />
       </button>
     </div>
     <div

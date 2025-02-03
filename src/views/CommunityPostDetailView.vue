@@ -13,7 +13,7 @@ const post = route.query;
   <div class="community-post-detail-container pb-[70px] px-4">
     <div class="user-info flex items-center mt-3 mb-3">
       <img
-        src="@/assets/img/setting/user-picture.png"
+        src="/img/setting/user-picture.png"
         alt="user-picture"
         class="w-12 h-12 rounded-full mr-3"
       />
