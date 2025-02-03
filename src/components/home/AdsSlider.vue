@@ -16,7 +16,7 @@ const ads = [1, 2, 3];
   >
     <swiper-slide v-for="ad in ads">
       <a class="flex justify-center">
-        <div class="flex h-[219px]">
+        <div class="flex">
           <img
             :src="'/img/ads/ads_' + ad + '.png'"
             alt="shopping_button"
