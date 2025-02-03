@@ -59,16 +59,16 @@ const goToDetail = (post) => {
       </div>
     </div>
     <div class="post-footer flex justify-between">
-      <div class="footer-left flex gap-4 text-sm">
-        <div class="like-container flex">
+      <div class="footer-left flex items-center gap-4 text-sm">
+        <div class="like-container flex items-center">
           <img src="/img/post/icon-like.svg" alt="icon-comment" />
           <span class="ml-1">{{ post.likes }}</span>
         </div>
-        <div class="comments-container flex">
+        <div class="comments-container flex items-center">
           <img src="/img/post/icon-comment.svg" alt="icon-comment" />
           <span class="ml-1">{{ post.comments }}</span>
         </div>
-        <div class="share flex">
+        <div class="share flex items-center">
           <img src="/img/post/icon-share.svg" alt="icon-comment" />
         </div>
       </div>

@@ -9,7 +9,7 @@ defineProps({
   <swiper-slide>
     <a :href="item.link" target="_blank">
       <div
-        class="w-[152px] h-[232px] flex flex-col items-center p-2 shadow-[0_4px_12px_#0a0f150a]"
+        class="max-w-[152px] h-[232px] flex flex-col items-center p-2 shadow-[0_4px_12px_#0a0f150a]"
       >
         <img :src="item.src" alt="" class="w-[100px] h-[100px]" />
         <div
@@ -20,15 +20,15 @@ defineProps({
             <span>{{ item.price + "원" }}</span>
             <span class="text-[#2760EE]">{{ item.discount + "%" }}</span>
           </div>
-          <div class="flex w-full text-white text-[10px]">
+          <div class="flex items-center w-full text-white text-[10px]">
             <span
               v-if="item.best"
-              class="w-[41px] h-5 bg-[#2760ee] rounded-xl px-2 py-0.5"
+              class="flex justify-center items-center w-[41px] h-5 bg-[#2760ee] rounded-xl px-2 py-0.5"
               >BEST</span
             >
             <span
               v-if="item.new"
-              class="w-[41px] h-5 bg-[#59d683] rounded-xl px-2 py-0.5 ml-1"
+              class="flex justify-center items-center w-[41px] h-5 bg-[#59d683] rounded-xl px-2 py-0.5 ml-1"
               >NEW</span
             >
           </div>
