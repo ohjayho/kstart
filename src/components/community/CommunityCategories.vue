@@ -12,8 +12,10 @@ const categories = [
   "Free Talk"
 ];
 const curCategory = ref("All");
+const emit = defineEmits(["updateCategory"]);
 const onClick = (category) => {
   curCategory.value = category;
+  emit("updateCategory", curCategory.value);
 };
 </script>
 
