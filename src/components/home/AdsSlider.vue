@@ -18,7 +18,7 @@ const ads = [1, 2, 3];
       <a class="flex justify-center">
         <div class="flex h-[219px]">
           <img
-            :src="'src/assets/img/ads/ads_' + ad + '.png'"
+            :src="'/img/ads/ads_' + ad + '.png'"
             alt="shopping_button"
             class="rounded-xl"
           />

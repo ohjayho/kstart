@@ -4,11 +4,7 @@
       <div
         class="message-icon flex-shrink-0 rounded-full border border-[#2760ed] w-10 h-10 flex justify-center items-center mr-2"
       >
-        <img
-          src="@/assets/inbox/icon-notice.png"
-          alt="icon-notice"
-          class="w-6"
-        />
+        <img src="/img/inbox/icon-notice.png" alt="icon-notice" class="w-6" />
       </div>
       <div class="message-text text-sm text-[#1f2937]">
         오재호님의 한국 생활은 어떤가요? 지금 커뮤니티에서 오재호님의 다양한

@@ -17,17 +17,17 @@ register();
   >
     <swiper-slide>
       <a href="https://support.kstart.co.kr/ko" target="_blank">
-        <img src="@/assets/img/sliderImg/first.png" alt="First Image" />
+        <img src="/img/sliderImg/first.png" alt="First Image" />
       </a>
     </swiper-slide>
     <swiper-slide>
       <a href="https://support.kstart.co.kr/ko" target="_blank">
-        <img src="@/assets/img/sliderImg/second.png" alt="Second Image" />
+        <img src="/img/sliderImg/second.png" alt="Second Image" />
       </a>
     </swiper-slide>
     <swiper-slide>
       <a href="https://support.kstart.co.kr/ko" target="_blank">
-        <img src="@/assets/img/sliderImg/third.png" alt="Third Image" />
+        <img src="/img/sliderImg/third.png" alt="Third Image" />
       </a>
     </swiper-slide>
   </swiper-container>

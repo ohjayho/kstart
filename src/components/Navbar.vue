@@ -1,5 +1,4 @@
 <script setup>
-import { getImageUrl } from "@/utils/getImageUrl";
 import { useRoute } from "vue-router";
 const navBtns = [
   {
@@ -36,13 +35,11 @@ const isActiveLink = (routePath) => {
       class="w-1/4 h-full flex flex-col items-center justify-center hover:bg-[#f5f7fa]"
     >
       <img
-        :src="
-          getImageUrl(
-            `src/assets/img/navbar/${isActiveLink(btn.route) ? 'clicked' : ''}${
-              btn.name
-            }.png`
-          )
-        "
+        :src="`/img/navbar/${
+          isActiveLink(btn.route)
+            ? 'clicked' + btn.name.charAt(0).toUpperCase() + btn.name.slice(1)
+            : btn.name
+        }.png`"
         :alt="btn.name"
         class="w-6 m-1"
       />

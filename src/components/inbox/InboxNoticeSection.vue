@@ -4,11 +4,7 @@
       <div
         class="message-icon flex-shrink-0 rounded-full border border-[#2760ed] w-10 h-10 flex justify-center items-center mr-2"
       >
-        <img
-          src="@/assets/inbox/icon-notice.png"
-          alt="icon-notice"
-          class="w-6"
-        />
+        <img src="/img/inbox/icon-notice.png" alt="icon-notice" class="w-6" />
       </div>
       <div class="message-text text-sm text-[#1f2937]">
         Photo Contest 이벤트가 진행 중이에요! 한국의 겨울 사진을 올리고 5만 원을

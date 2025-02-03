@@ -6,7 +6,7 @@
       >
         Grand Opening
         <img
-          src="@/assets/img/benefit/benefit-opening.png"
+          src="/img/benefit/benefit-opening.png"
           class="absolute w-[176px] -top-36 -z-10"
           alt="benefit-opening"
         />

@@ -1,5 +1,4 @@
 <script setup>
-import { getImageUrl } from "@/utils/getImageUrl";
 defineProps({
   item: Object,
   index: Number
@@ -12,7 +11,7 @@ defineProps({
       <div
         class="w-[152px] h-[232px] flex flex-col items-center p-2 shadow-[0_4px_12px_#0a0f150a]"
       >
-        <img :src="getImageUrl(item.src)" alt="" class="w-[100px] h-[100px]" />
+        <img :src="item.src" alt="" class="w-[100px] h-[100px]" />
         <div
           class="card-body h-[86px] flex flex-col justify-between text-[12px]"
         >

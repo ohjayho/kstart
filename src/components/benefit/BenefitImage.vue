@@ -1,27 +1,27 @@
 <template>
   <div class="benefit-image-container w-full h-[340px] relative">
     <img
-      src="@/assets/img/benefit/benefit-thunder.png"
+      src="/img/benefit/benefit-thunder.png"
       class="w-[53px] absolute left-[38px] top-0"
     />
     <img
-      src="@/assets/img/benefit/benefit-thunder.png"
+      src="/img/benefit/benefit-thunder.png"
       class="w-[53px] absolute right-[15px] top-[25px]"
     />
     <img
-      src="@/assets/img/benefit/benefit-thunder.png"
+      src="/img/benefit/benefit-thunder.png"
       class="w-[53px] absolute left-[20px] top-[170px]"
     />
     <img
-      src="@/assets/img/benefit/benefit-thunder.png"
+      src="/img/benefit/benefit-thunder.png"
       class="w-[53px] absolute left-[160px] bottom-0"
     />
     <img
-      src="@/assets/img/benefit/benefit-megaphone.png"
+      src="/img/benefit/benefit-megaphone.png"
       class="w-[157px] absolute right-0 top-[107px]"
     />
     <img
-      src="@/assets/img/benefit/benefit-thunders.png"
+      src="/img/benefit/benefit-thunders.png"
       class="w-[48px] absolute right-[151px] top-[80px]"
     />
     <span

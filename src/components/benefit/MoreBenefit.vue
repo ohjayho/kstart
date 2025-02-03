@@ -1,17 +1,17 @@
 <script setup>
 const moreBenefits = [
-  { name: "쇼핑", image: "src/assets/img/benefit/more-benefit-shopping.png" },
+  { name: "쇼핑", image: "/img/benefit/more-benefit-shopping.png" },
   {
     name: "커뮤니티",
-    image: "src/assets/img/benefit/more-benefit-community.png"
+    image: "/img/benefit/more-benefit-community.png"
   },
   {
     name: "보험",
-    image: "src/assets/img/benefit/more-benefit-insurance.png"
+    image: "/img/benefit/more-benefit-insurance.png"
   },
   {
     name: "대출",
-    image: "src/assets/img/benefit/more-benefit-loan.png"
+    image: "/img/benefit/more-benefit-loan.png"
   }
 ];
 </script>
