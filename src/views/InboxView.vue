@@ -1,6 +1,7 @@
 <script setup>
 import Header from "@/components/Header.vue";
-import NoticeSection from "@/components/inbox/NoticeSection.vue";
+import InboxCommunitySection from "@/components/inbox/InboxCommunitySection.vue";
+import InboxNoticeSection from "@/components/inbox/InboxNoticeSection.vue";
 import { onMounted, ref } from "vue";
 
 const activeWidth = ref(0);
@@ -54,7 +55,8 @@ const selectTab = (tabName) => {
         Community
       </button>
     </div>
-    <NoticeSection v-if="selectedTab === 'Notice'" />
+    <InboxNoticeSection v-if="selectedTab === 'Notice'" />
+    <InboxCommunitySection v-if="selectedTab === 'Community'" />
   </div>
 </template>
 
