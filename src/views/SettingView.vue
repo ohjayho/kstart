@@ -5,7 +5,7 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
 
 <template>
   <Header />
-  <div class="setting-container pt-[80px] px-4">
+  <div class="setting-container pt-[90px] pb-[120px] px-4 flex flex-col gap-5">
     <div class="user-container flex items-center">
       <img
         src="@/assets/img/setting/user-picture.png"
@@ -17,7 +17,7 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
         <img src="@/assets/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
     </div>
-    <div class="setting-container">
+    <div class="setting-container flex flex-col gap-3">
       <div class="push-setting flex justify-between">
         <span class="text-sm">푸시 알림</span>
         <ToggleSwitch />
@@ -27,29 +27,85 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
         <ToggleSwitch />
       </div>
     </div>
-    <div class="activity-container">
-      <button>나의 커뮤니티</button>
-      <button>나의 쇼핑</button>
+    <div class="activity-container flex flex-col gap-3">
+      <h1>My Activity</h1>
+      <button class="btn">
+        <span>나의 커뮤니티</span>
+        <img
+          src="@/assets/img/rightArrow.png"
+          class="w-[14px]"
+          alt="rightArrowImg"
+        />
+      </button>
+      <button class="btn">
+        <span>나의 쇼핑</span>
+        <img
+          src="@/assets/img/rightArrow.png"
+          class="w-[14px]"
+          alt="rightArrowImg"
+        />
+      </button>
     </div>
-    <div class="about-container">
-      <button>공지사항</button>
-      <button>약관</button>
+    <div class="about-container flex flex-col gap-3">
+      <h1>About Service</h1>
+      <button class="btn">
+        <span>공지사항</span>
+        <img
+          src="@/assets/img/rightArrow.png"
+          class="w-[14px]"
+          alt="rightArrowImg"
+        />
+      </button>
+      <button class="btn">
+        <span>약관</span>
+        <img
+          src="@/assets/img/rightArrow.png"
+          class="w-[14px]"
+          alt="rightArrowImg"
+        />
+      </button>
     </div>
-    <div class="company-info-container">
-      <h1>Kworkpartners Co., Ltd.</h1>
-      <h2>
-        CEO : Cho sungkon, Kong sunwook<br />
-        Business Registration No. 388-81-03060
-      </h2>
-      <h2>
-        Seoul Office<br />
-        707, 547 Yangcheon-ro, Gangseo-gu, Seoul (Gayang-dong)
-      </h2>
-      <h2>
-        Head Office<br />
-        5th FL, 48 Buldang 14-ro, Seobuk-gu, Cheonan-si, Chungnam
-      </h2>
-      <h2>COPYRIGHT ⒸK start. ALL RIGHTS RESERVED</h2>
+    <div
+      class="company-info-container text-sm flex flex-col gap-3 text-[#303133]"
+    >
+      <h1 class="font-extrabold">Kworkpartners Co., Ltd.</h1>
+      <p class="flex flex-col">
+        <span> CEO : Cho sungkon, Kong sunwook </span>
+        <span> Business Registration No. 388-81-03060 </span>
+      </p>
+      <p class="flex flex-col">
+        <span class="font-semibold"> Seoul Office</span>
+        <span> 707, 547 Yangcheon-ro, Gangseo-gu, Seoul (Gayang-dong) </span>
+      </p>
+      <p class="flex flex-col">
+        <span class="font-semibold"> Head Office </span>
+        <span> 5th FL, 48 Buldang 14-ro, Seobuk-gu, Cheonan-si, Chungnam </span>
+      </p>
+      <p>COPYRIGHT ⒸK start. ALL RIGHTS RESERVED</p>
     </div>
+    <button
+      class="flex justify-center border border-[#ca5c5c] px-5 py-4 rounded-3xl text-[#ca5c5c] font-semibold"
+    >
+      로그아웃
+    </button>
   </div>
 </template>
+
+<style>
+.btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: start;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border: 1px;
+  border-style: solid;
+  border-color: #d3d3d3;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+</style>
