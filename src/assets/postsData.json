@@ -1,0 +1,53 @@
+[
+  {
+    "user": "오재호",
+    "date": "22시간 전",
+    "category": "Free Talk",
+    "title": "동네 친구 하실 분!",
+    "description": "강서구에서 같이 맛집 탐방할 친구를 구해요! 강서구에 맛있는 식당과 카페가 많은데 같이 돌아 다녀요!! 식물원이랑 코엑스도 놀러가요.",
+    "img": "/img/example/example1.jpg",
+    "likes": 3,
+    "comments": 1
+  },
+  {
+    "user": "김민지",
+    "date": "1일 전",
+    "category": "Photo Contest",
+    "title": "내 강아지 자랑하기 🐶",
+    "description": "우리 강아지 너무 귀엽지 않나요? 여러분도 반려동물 사진 자랑해 주세요!",
+    "img": "/img/example/example2.jpg",
+
+    "likes": 15,
+    "comments": 1
+  },
+  {
+    "user": "박수현",
+    "date": "3시간 전",
+    "category": "Life Tip",
+    "title": "아침 루틴 추천해요!",
+    "description": "매일 아침 6시에 일어나서 스트레칭 + 따뜻한 물 마시기 시작했는데 너무 좋아요. 여러분도 해보세요!",
+    "img": "/img/example/example3.jpg",
+    "likes": 7,
+    "comments": 1
+  },
+  {
+    "user": "이정환",
+    "date": "2일 전",
+    "category": "Q&A",
+    "title": "노트북 추천 좀 해주세요!",
+    "description": "프로그래밍 & 영상 편집용으로 쓸 노트북을 사려는데, 맥북이 좋을까요? 아니면 윈도우가 좋을까요?",
+    "img": "/img/example/example4.jpg",
+    "likes": 9,
+    "comments": 1
+  },
+  {
+    "user": "최유진",
+    "date": "5시간 전",
+    "category": "Free Talk",
+    "title": "요즘 보고 있는 드라마 있어요?",
+    "description": "넷플릭스, 티빙, 웨이브에서 요즘 재밌게 보고 있는 드라마 추천해 주세요! 로맨스, 스릴러 다 좋아요~",
+    "img": "/img/example/example5.jpg",
+    "likes": 11,
+    "comments": 1
+  }
+]
