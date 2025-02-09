@@ -20,7 +20,9 @@ const navBtns = [
 ];
 const isActiveLink = (routePath) => {
   const route = useRoute();
-  return route.path === routePath;
+  const link = route.path.split("/")[1];
+  const activeLink = link.length ? "/" + link : "/";
+  return activeLink === routePath;
 };
 </script>
 
