@@ -3,12 +3,18 @@ import CommunityPostDetailView from "@/views/CommunityPostDetailView.vue";
 import CommunityView from "@/views/CommunityView.vue";
 import HomeView from "@/views/HomeView.vue";
 import InboxView from "@/views/InboxView.vue";
+import Login from "@/views/Login.vue";
 import SettingView from "@/views/SettingView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/login",
+      name: "login",
+      component: Login
+    },
     {
       path: "/",
       name: "home",
