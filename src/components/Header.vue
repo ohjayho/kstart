@@ -8,7 +8,7 @@ import NewBadge from "./NewBadge.vue";
     class="w-[500px] max-w-full h-[60px] fixed top-0 z-20 flex justify-between items-center px-5 bg-white"
   >
     <RouterLink to="/">
-      <img src="/img/header/logo.png" alt="" class="h-[30px]" />
+      <img src="/img/logo.png" alt="" class="h-[30px]" />
     </RouterLink>
     <div class="flex">
       <RouterLink
