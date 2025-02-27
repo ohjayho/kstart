@@ -6,9 +6,8 @@ import {
   signInWithEmailAndPassword
 } from "firebase/auth";
 import { useRouter } from "vue-router";
+import SubHeader from "@/components/SubHeader.vue";
 
-const email = ref("");
-const password = ref("");
 const router = useRouter();
 
 const register = () => {
@@ -22,28 +21,27 @@ const register = () => {
       alert(err.message);
     });
 };
-
-const login = () => {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-      console.log("Sucessfully login!");
-      //   router.push("/");
-    })
-    .catch((err) => {
-      console.log(err.code);
-      alert(err.message);
-    });
-};
 </script>
 
 <template>
-  <h1>Create an Account</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p><button @click="register">Submit</button></p>
-  <p><button>Sign in with Google</button></p>
-  <h1>Login</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p><button @click="login">Submit</button></p>
+  <SubHeader title="시작하기" />
+  <div class="login_container pt-[60px] flex flex-col items-center">
+    <div class="logo_wrapper flex items-center my-[138px]">
+      <img src="/img/logo.png" alt="logo" class="h-12" />
+    </div>
+    <RouterLink to="/loginID" class="login_btn">ID로 시작하기</RouterLink>
+  </div>
 </template>
+
+<style>
+.login_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  padding: 8px 15px 8px 15px;
+  border: 1px solid rgb(210, 213, 218);
+  border-radius: 26px;
+}
+</style>
