@@ -4,6 +4,7 @@ import CommunityView from "@/views/CommunityView.vue";
 import HomeView from "@/views/HomeView.vue";
 import InboxView from "@/views/InboxView.vue";
 import Login from "@/views/Login.vue";
+import LoginWithID from "@/views/LoginWithID.vue";
 import SettingView from "@/views/SettingView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/loginID",
+      name: "loginID",
+      component: LoginWithID
     },
     {
       path: "/",
