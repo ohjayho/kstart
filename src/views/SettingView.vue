@@ -1,6 +1,38 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
 import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
+import { RouterLink, useRouter } from "vue-router";
+
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { ref } from "vue";
+
+const isLoggedIn = ref(false);
+const username = ref("");
+const router = useRouter();
+const auth = getAuth();
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    isLoggedIn.value = true;
+    username.value = user.providerData[0].uid;
+    // console.log(user.providerData.uid);
+  } else {
+    isLoggedIn.value = false;
+    // User is signed out
+    // ...
+  }
+});
+const onSignOut = () => {
+  signOut(auth)
+    .then(() => {
+      router.push("/setting");
+      isLoggedIn.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(err);
+    });
+};
 </script>
 
 <template>
@@ -12,7 +44,7 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
         alt="user-picture"
         class="w-14 h-14 rounded-full mr-3"
       />
-      <div class="user-name mr-3 text-lg h-full">오재호</div>
+      <div class="user-name mr-3 text-lg h-full">{{ username }}</div>
       <button class="user-edit">
         <img src="/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
@@ -68,10 +100,19 @@ import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
       <p>COPYRIGHT ⒸK start. ALL RIGHTS RESERVED</p>
     </div>
     <button
+      v-if="isLoggedIn"
+      @click="onSignOut"
       class="flex justify-center border border-[#ca5c5c] px-5 py-4 rounded-3xl text-[#ca5c5c] font-semibold"
     >
       로그아웃
     </button>
+    <RouterLink
+      v-if="!isLoggedIn"
+      to="/login"
+      class="flex justify-center border border-[#2760ee] px-5 py-4 rounded-3xl text-[#2760ee] font-semibold"
+    >
+      로그인
+    </RouterLink>
   </div>
 </template>
 
