@@ -2,7 +2,7 @@
 import SubHeader from "@/components/SubHeader.vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 
 const email = ref("");
 const password = ref("");
@@ -53,7 +53,7 @@ const login = () => {
       >
         로그인
       </button>
-      <button class="login_btn">회원가입</button>
+      <RouterLink to="/signUpID" class="login_btn">회원가입</RouterLink>
       <button class="text-[#9ca3af] text-[13px] underline">
         비밀번호 찾기
       </button>
