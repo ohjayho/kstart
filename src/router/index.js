@@ -6,6 +6,7 @@ import InboxView from "@/views/InboxView.vue";
 import Login from "@/views/Login.vue";
 import LoginWithID from "@/views/LoginWithID.vue";
 import SettingView from "@/views/SettingView.vue";
+import SignUpWithID from "@/views/SignUpWithID.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/loginID",
       name: "loginID",
       component: LoginWithID
+    },
+    {
+      path: "/signUpID",
+      name: "signUpID",
+      component: SignUpWithID
     },
     {
       path: "/",
