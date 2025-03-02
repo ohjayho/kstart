@@ -18,7 +18,6 @@ const handleUpdateCategory = (category) => {
     <SearchBar />
     <CommunityCategories @updateCategory="handleUpdateCategory" />
     <CommunityPosts
-      :category="category"
       :posts="
         curCategory === 'All'
           ? posts

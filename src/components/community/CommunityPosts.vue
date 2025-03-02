@@ -4,8 +4,7 @@ import CommunityCategoryBadge from "./CommunityCategoryBadge.vue";
 import { getImageUrl } from "@/utils/getImageUrl";
 
 defineProps({
-  posts: Array,
-  category: String
+  posts: Array
 });
 
 const router = useRouter();
