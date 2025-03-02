@@ -14,6 +14,9 @@ const signUp = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log("Sucessfully registered!");
+      alert("가입이 완료되었습니다!\n로그인 하세요.");
+      router.push("/login");
     })
     .catch((err) => {
       console.log(err.code);
