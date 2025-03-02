@@ -2,9 +2,17 @@
 import { useRouter } from "vue-router";
 import CommunityCategoryBadge from "./CommunityCategoryBadge.vue";
 import { getImageUrl } from "@/utils/getImageUrl";
+import { formatTimeAgo } from "@/utils/formatTimeAgo";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   posts: Array
+});
+
+const sortedPosts = computed(() => {
+  return [...props.posts].sort((a, b) => {
+    return b.date?.seconds - a.date?.seconds;
+  });
 });
 
 const router = useRouter();
@@ -13,7 +21,7 @@ const goToDetail = (post) => {
     path: "/community/1",
     query: {
       user: post.user,
-      date: post.date,
+      date: formatTimeAgo(post.date.seconds),
       category: post.category,
       title: post.title,
       description: post.description,
@@ -26,11 +34,11 @@ const goToDetail = (post) => {
 </script>
 
 <template>
-  <div v-if="!posts.length" class="posts-empty mt-5">
+  <div v-if="!sortedPosts.length" class="posts-empty mt-5">
     <h1 class="text-center text-[#6d7280]">게시글이 없습니다.</h1>
   </div>
   <div
-    v-for="post in posts"
+    v-for="post in sortedPosts"
     class="post-container py-4 border-t border-b border-gray"
     @click="goToDetail(post)"
   >
@@ -72,7 +80,9 @@ const goToDetail = (post) => {
         </div>
       </div>
       <div class="footer-right">
-        <span class="text-sm">{{ post.date }}</span>
+        <span class="text-sm">{{
+          post.date ? formatTimeAgo(post.date.seconds) : "No date Available"
+        }}</span>
       </div>
     </div>
   </div>
