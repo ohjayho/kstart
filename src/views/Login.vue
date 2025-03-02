@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from "vue";
-import { getAuth } from "firebase/auth";
 import SubHeader from "@/components/SubHeader.vue";
 </script>
 
