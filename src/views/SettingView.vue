@@ -18,6 +18,7 @@ onAuthStateChanged(auth, (user) => {
     // console.log(user.providerData.uid);
   } else {
     isLoggedIn.value = false;
+    username.value = "로그인 해주세요.";
     // User is signed out
     // ...
   }
