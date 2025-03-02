@@ -5,5 +5,5 @@ import CommunityCategories from "@/components/community/CommunityCategories.vue"
 
 <template>
   <SubHeader title="New feed" />
-  <CommunityCategories class="mt-15" />
+  <CommunityCategories class="mt-[60px]" :isBadgeVisible="false" />
 </template>
