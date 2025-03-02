@@ -1,28 +1,16 @@
-<script setup lang="ts">
+<script setup>
 import Header from "@/components/Header.vue";
 import ToggleSwitch from "@/components/setting/ToggleSwitch.vue";
 import { RouterLink, useRouter } from "vue-router";
 
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { ref } from "vue";
+import { signOut } from "firebase/auth";
+import { useAuth } from "@/firebase/checkAuth";
+import { auth } from "@/firebase/initializeFirebase";
 
-const isLoggedIn = ref(false);
-const username = ref("로그인 해주세요.");
 const router = useRouter();
-const auth = getAuth();
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    isLoggedIn.value = true;
-    username.value = user.providerData[0].uid;
-    // console.log(user.providerData.uid);
-  } else {
-    isLoggedIn.value = false;
-    username.value = "로그인 해주세요.";
-    // User is signed out
-    // ...
-  }
-});
+const { username, isLoggedIn } = useAuth();
+
 const onSignOut = () => {
   signOut(auth)
     .then(() => {
