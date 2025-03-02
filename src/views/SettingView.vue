@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { ref } from "vue";
 
 const isLoggedIn = ref(false);
-const username = ref("");
+const username = ref("로그인 해주세요.");
 const router = useRouter();
 const auth = getAuth();
 
@@ -44,8 +44,14 @@ const onSignOut = () => {
         alt="user-picture"
         class="w-14 h-14 rounded-full mr-3"
       />
-      <div class="user-name mr-3 text-lg h-full">{{ username }}</div>
-      <button class="user-edit">
+      <RouterLink
+        to="/login"
+        class="user-name mr-3 text-lg h-full"
+        :class="{ underline: !isLoggedIn, 'text-[#9ca3af]': !isLoggedIn }"
+      >
+        {{ username }}
+      </RouterLink>
+      <button v-if="isLoggedIn" class="user-edit">
         <img src="/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
     </div>
