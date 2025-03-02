@@ -1,26 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "firebase/auth";
-import { useRouter } from "vue-router";
+import { getAuth } from "firebase/auth";
 import SubHeader from "@/components/SubHeader.vue";
-
-const router = useRouter();
-
-const register = () => {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-      console.log("Sucessfully registered!");
-      router.push("/");
-    })
-    .catch((err) => {
-      console.log(err.code);
-      alert(err.message);
-    });
-};
 </script>
 
 <template>
