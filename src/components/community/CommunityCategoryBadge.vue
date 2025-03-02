@@ -9,7 +9,8 @@ const colors = {
   News: "#e67e22",
   "Life Tip": "#2ecc71",
   "Q&A": "#8e44ad",
-  "Free Talk": "#f39c12"
+  "Free Talk": "#f39c12",
+  Event: "#e74c3c"
 };
 </script>
 
