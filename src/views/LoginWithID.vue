@@ -16,8 +16,8 @@ const login = () => {
       router.push("/setting");
     })
     .catch((err) => {
+      alert("아이디/비밀번호를 확인해 주세요");
       console.log(err.code);
-      alert(err.message);
     });
 };
 </script>
@@ -39,6 +39,7 @@ const login = () => {
         placeholder="비밀번호를 입력해 주세요."
         class="login_input"
         v-model="password"
+        @keyup.enter="login"
       />
     </form>
     <div
