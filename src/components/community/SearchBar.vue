@@ -22,7 +22,7 @@ const onDelete = () => {
 
 <template>
   <div
-    class="search-container h-10 my-[11px] mx-5 px-4 border border-[#e0e2e6] rounded-xl flex items-center transition-colors"
+    class="search-container h-10 my-[11px] px-4 border border-[#e0e2e6] rounded-xl flex items-center transition-colors"
   >
     <img src="/img/search/search.png" alt="search" class="w-[18px] mr-3" />
     <input

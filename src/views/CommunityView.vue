@@ -14,7 +14,7 @@ const handleUpdateCategory = (category) => {
 </script>
 
 <template>
-  <div class="community-view-container pb-[70px] relative">
+  <div class="community-view-container pb-[70px] relative px-4">
     <SearchBar />
     <CommunityCategories @updateCategory="handleUpdateCategory" />
     <CommunityPosts

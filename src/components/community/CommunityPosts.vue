@@ -31,7 +31,7 @@ const goToDetail = (post) => {
   </div>
   <div
     v-for="post in posts"
-    class="post-container p-4 border-t border-b border-gray"
+    class="post-container py-4 border-t border-b border-gray"
     @click="goToDetail(post)"
   >
     <div class="post-header mb-2 flex items-center justify-between">
