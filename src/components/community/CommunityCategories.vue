@@ -2,6 +2,10 @@
 import { ref } from "vue";
 import NewBadge from "../NewBadge.vue";
 
+defineProps({
+  isBadgeVisible: Boolean
+});
+
 const categories = [
   "All",
   "Photo Contest",
@@ -20,7 +24,7 @@ const onClick = (category) => {
 </script>
 
 <template>
-  <div class="categories-container flex gap-2 flex-wrap p-4">
+  <div class="categories-container $attrs.class flex gap-2 flex-wrap p-4">
     <button
       v-for="category in categories"
       :key="category"
@@ -33,7 +37,10 @@ const onClick = (category) => {
       @click="onClick(category)"
     >
       {{ category }}
-      <NewBadge v-if="category === 'Photo Contest'" class="-left-1 w-5 h-5" />
+      <NewBadge
+        v-if="category === 'Photo Contest' && isBadgeVisible"
+        class="-left-1 w-5 h-5"
+      />
     </button>
     <div class="posts-container">
       <div class="post-header"></div>
