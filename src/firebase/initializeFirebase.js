@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import {
   browserSessionPersistence,
   getAuth,
@@ -21,6 +22,11 @@ export const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+export { db };
+
 export const auth = getAuth(app);
 
 setPersistence(auth, browserSessionPersistence)
@@ -30,8 +36,3 @@ setPersistence(auth, browserSessionPersistence)
   .catch((error) => {
     console.log(error.code, error.message);
   });
-
-// // Initialize Cloud Firestore and get a reference to the service
-// const db = getFirestore(app);
-
-// export { db };
