@@ -5,7 +5,7 @@ export function formatTimeAgo(fbSeconds) {
   const date = new Date(fbSeconds * 1000);
   //Date function takes milliseconds
   const now = new Date();
-  console.log(date, now);
+  // console.log(date, now);
   const seconds = Math.floor((now - date) / 1000);
 
   if (seconds < 60) {
