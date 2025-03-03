@@ -8,14 +8,22 @@ export function formatTimeAgo(fbSeconds) {
   // console.log(date, now);
   const seconds = Math.floor((now - date) / 1000);
 
-  if (seconds < 60) {
+  if (seconds === 1) {
+    return `1 second ago`;
+  } else if (seconds < 60) {
     return `${seconds} seconds ago`;
+  } else if (seconds === 60) {
+    return `1 minute ago`;
   } else if (seconds < 3600) {
     const minutes = Math.floor(seconds / 60);
     return `${minutes} minutes ago`;
+  } else if (seconds === 3600) {
+    return `1 hour ago`;
   } else if (seconds < 86400) {
     const hours = Math.floor(seconds / 3600);
     return `${hours} hours ago`;
+  } else if (seconds === 86400) {
+    return `1 day ago`;
   } else {
     const days = Math.floor(seconds / 86400);
     return `${days} days ago`;
