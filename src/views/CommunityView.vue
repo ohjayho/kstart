@@ -29,7 +29,7 @@ onMounted(() => {
         comments: doc.data().comments
       };
       fbPosts.push(post);
-      console.log(doc.id, "=>", doc.data());
+      // console.log(doc.id, "=>", doc.data());
     });
     posts.value = fbPosts;
   });

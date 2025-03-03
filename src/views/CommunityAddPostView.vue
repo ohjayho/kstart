@@ -15,7 +15,6 @@ const router = useRouter();
 
 const handleUpdateCategory = (newCategory) => {
   category.value = newCategory;
-  console.log(category.value);
 };
 
 const addPost = async () => {
@@ -38,7 +37,7 @@ const addPost = async () => {
       likes: 3,
       comments: 5
     });
-    console.log("Document written with ID: ", docRef.id);
+    // console.log("Document written with ID: ", docRef.id);
     alert("게시글이 등록됐습니다.");
     router.push("/community");
   } catch (error) {
