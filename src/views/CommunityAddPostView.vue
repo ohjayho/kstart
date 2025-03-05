@@ -164,13 +164,7 @@ const addPost = async () => {
           for="file"
           class="flex justify-center items-center w-[86px] h-[86px] bg-[#d2d5da] text-white text-4xl rounded-lg"
         >
-          <template v-if="loadingImg">
-            <img
-              src="/img/loading.png"
-              alt="loading Image"
-              class="animate-spin"
-            />
-          </template>
+          <Loading v-if="loadingImg" />
           <template v-else> + </template>
         </label>
         <div
