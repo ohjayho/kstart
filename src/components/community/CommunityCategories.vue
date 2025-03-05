@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import NewBadge from "../NewBadge.vue";
 
-defineProps({
+const props = defineProps({
   newPost: Boolean
 });
 
@@ -15,7 +15,7 @@ const categories = [
   "Event",
   "Free Talk"
 ];
-const curCategory = ref("All");
+const curCategory = ref(props.newPost ? "Photo Contest" : "All");
 const emit = defineEmits(["updateCategory"]);
 const onClick = (category) => {
   curCategory.value = category;
@@ -37,10 +37,7 @@ const onClick = (category) => {
         @click="onClick(category)"
       >
         {{ category }}
-        <NewBadge
-          v-if="category === 'Photo Contest' && !newPost"
-          class="-left-1 w-5 h-5"
-        />
+        <NewBadge v-if="category === 'Photo Contest'" class="-left-1 w-5 h-5" />
       </button>
     </template>
   </div>

@@ -14,7 +14,7 @@ import {
 } from "firebase/storage";
 import { useRouter } from "vue-router";
 
-const category = ref(null);
+const category = ref("Photo Contest");
 const title = ref("");
 const text = ref("");
 const img = ref(null);
