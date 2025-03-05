@@ -9,7 +9,7 @@ const goBack = () => {
 
 <template>
   <header
-    class="sticky top-0 w-full flex justify-between h-15 px-5 py-[11px] bg-white"
+    class="sticky top-0 w-full flex justify-between h-15 px-5 py-[11px] bg-white z-10"
   >
     <button @click="goBack">
       <img src="/img/leftArrow.png" alt="left arrow" class="h-6" />
