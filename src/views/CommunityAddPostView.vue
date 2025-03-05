@@ -137,7 +137,9 @@ const addPost = async () => {
 </script>
 
 <template>
-  <div class="add-post-container flex flex-col items-center px-4">
+  <div
+    class="add-post-container w-full flex flex-col items-center px-4 pb-[80px]"
+  >
     <SubHeader title="New feed" />
     <CommunityCategories
       class="mt-[60px]"
@@ -146,12 +148,12 @@ const addPost = async () => {
     />
     <input
       type="text"
-      class="w-[460px] h-[42px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none"
+      class="w-full h-[42px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none"
       placeholder="Title"
       v-model="title"
     />
     <textarea
-      class="w-[460px] h-[300px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none mt-5"
+      class="w-full h-[300px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none mt-5"
       placeholder="Text"
       v-model="text"
     ></textarea>
