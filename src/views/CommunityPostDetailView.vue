@@ -26,9 +26,14 @@ const post = route.query;
         <span class="user-name text-base">{{ post.user }}</span>
       </div>
     </div>
-    <h1 class="post-title text-lg mb-3">{{ post.title }}</h1>
+    <h1 class="post-title text-lg mt-5 mb-3">{{ post.title }}</h1>
     <p class="mb-3">{{ post.description }}</p>
-    <img :src="post.img" alt="" class="post-image w-full h-full" />
+    <img
+      v-if="post.img"
+      :src="post.img"
+      alt=""
+      class="post-image w-full h-full"
+    />
     <CommunityPostCommentSection :comments="post.comments" />
   </div>
 </template>

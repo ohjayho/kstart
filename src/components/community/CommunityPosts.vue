@@ -62,7 +62,12 @@ const goToDetail = (post) => {
       <div
         class="post-img w-20 h-20 flex flex-shrink-0 justify-center items-center overflow-hidden"
       >
-        <img :src="getImageUrl(post.img)" alt="img" class="object-contain" />
+        <img
+          v-if="post.img"
+          :src="getImageUrl(post.img)"
+          alt="img"
+          class="object-contain"
+        />
       </div>
     </div>
     <div class="post-footer flex justify-between">
