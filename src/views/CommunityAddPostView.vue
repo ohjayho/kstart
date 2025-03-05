@@ -5,11 +5,21 @@ import { ref } from "vue";
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "@/firebase/checkAuth";
-import { db } from "@/firebase/initializeFirebase";
+import { db, storage } from "@/firebase/initializeFirebase";
+import {
+  ref as firebaseRef,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject
+} from "firebase/storage";
 import { useRouter } from "vue-router";
 
 const category = ref(null);
+const title = ref("");
 const text = ref("");
+const img = ref(null);
+const fileKey = ref(0);
+const imgUrl = ref("");
 const { username } = useAuth();
 const router = useRouter();
 
@@ -17,23 +27,99 @@ const handleUpdateCategory = (newCategory) => {
   category.value = newCategory;
 };
 
+const onFileChange = (e) => {
+  img.value = e.target.files[0];
+  // Create a storage reference from our storage service
+  const file = img.value;
+  const storageRef = firebaseRef(storage, `images/${img.value}`); // Replace with your desired path
+  // Create the file metadata
+
+  // Upload the file
+  const uploadTask = uploadBytesResumable(storageRef, file); // file is your File object
+
+  // Listen for state changes, errors, and completion of the upload.
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+      switch (snapshot.state) {
+        case "paused":
+          console.log("Upload is paused");
+          break;
+        case "running":
+          console.log("Upload is running");
+          break;
+      }
+    },
+    (error) => {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case "storage/unauthorized":
+          // User doesn't have permission to access the object
+          break;
+        case "storage/canceled":
+          // User canceled the upload
+          break;
+        case "storage/unknown":
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
+    },
+    () => {
+      // Upload completed successfully, now we can get the download URL
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log("File available at", downloadURL);
+        imgUrl.value = downloadURL;
+      });
+    }
+  );
+};
+
+const onDeleteFile = () => {
+  // Create a reference to the file to delete
+  const desertRef = firebaseRef(storage, `images/${img.value}`);
+
+  // Delete the file
+  deleteObject(desertRef)
+    .then(() => {
+      // File deleted successfully
+      console.log(`${img.value.name} 삭제 완료`);
+      img.value = null;
+      imgUrl.value = "";
+      fileKey.value += 1;
+      //
+    })
+    .catch((error) => {
+      // Uh-oh, an error occurred!
+      console.log(`${img.value.name} 삭제 실패!`);
+    });
+};
+
 const addPost = async () => {
   if (!category.value) {
     alert("카테고리를 설정해 주세요.");
+    return;
+  }
+  if (!title.value) {
+    alert("제목을 입력해 주세요.");
     return;
   }
   if (!text.value) {
     alert("내용을 입력해 주세요.");
     return;
   }
+
   try {
     const docRef = await addDoc(collection(db, "posts"), {
       user: username.value,
       date: serverTimestamp(),
       category: category.value,
-      title: "제목이라네",
+      title: title.value,
       description: text.value,
-      img: "https://www.christiandaily.co.kr/board/data/editor/2105/thumb-33e1f7fbce47d3787240c01283e56d6c_1620104459_3667_600x800.jpg",
+      img: imgUrl.value,
       likes: 3,
       comments: 5
     });
@@ -55,11 +141,48 @@ const addPost = async () => {
       :newPost="true"
       @updateCategory="handleUpdateCategory"
     />
+    <input
+      type="text"
+      class="w-[460px] h-[42px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none"
+      placeholder="Title"
+      v-model="title"
+    />
     <textarea
-      class="w-[460px] h-[300px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none"
-      placeholder="Text Area"
+      class="w-[460px] h-[300px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none mt-5"
+      placeholder="Text"
       v-model="text"
     ></textarea>
+    <div class="upload-image flex flex-col w-full items-start mt-5">
+      <h2>사진 첨부</h2>
+      <div class="img-container flex items-center gap-3 mt-2">
+        <label
+          for="file"
+          class="flex justify-center items-center w-[86px] h-[86px] bg-[#d2d5da] text-white text-4xl rounded-lg"
+          >+</label
+        >
+        <div
+          class="img-preview w-[86px] h-[86px] bg-center bg-cover bg-[#d2d5da] rounded-lg relative"
+          v-if="imgUrl.length"
+          :style="{ backgroundImage: `url(${imgUrl})` }"
+        >
+          <button
+            v-if="img"
+            @click="onDeleteFile"
+            class="absolute flex justify-center items-center w-5 h-5 rounded-full bg-[rgba(0,0,0,0.3)] top-1 right-1 text-white text-xs"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+      <input
+        type="file"
+        id="file"
+        @change="onFileChange"
+        :key="fileKey"
+        class="hidden"
+      />
+    </div>
+
     <button
       class="post-submit-btn mt-10"
       :style="{
@@ -68,7 +191,7 @@ const addPost = async () => {
       :disabled="category && text.length > 0 ? false : true"
       @click="addPost"
     >
-      게시하기
+      게시
     </button>
   </div>
 </template>
