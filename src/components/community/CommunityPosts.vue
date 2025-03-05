@@ -6,7 +6,8 @@ import { formatTimeAgo } from "@/utils/formatTimeAgo";
 import { computed } from "vue";
 
 const props = defineProps({
-  posts: Array
+  posts: Array,
+  loadingPosts: Boolean
 });
 
 const sortedPosts = computed(() => {
@@ -34,7 +35,13 @@ const goToDetail = (post) => {
 </script>
 
 <template>
-  <div v-if="!sortedPosts.length" class="posts-empty mt-5">
+  <div
+    v-if="loadingPosts"
+    class="posts-loading flex justify-center items-center mt-5"
+  >
+    <img src="/img/loading.png" alt="loading" class="animate-spin" />
+  </div>
+  <div v-if="!sortedPosts.length && !loadingPosts" class="posts-empty mt-5">
     <h1 class="text-center text-[#6d7280]">게시글이 없습니다.</h1>
   </div>
   <div

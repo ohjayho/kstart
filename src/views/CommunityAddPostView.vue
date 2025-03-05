@@ -22,12 +22,14 @@ const fileKey = ref(0);
 const imgUrl = ref("");
 const { username } = useAuth();
 const router = useRouter();
+const loadingImg = ref(false);
 
 const handleUpdateCategory = (newCategory) => {
   category.value = newCategory;
 };
 
 const onFileChange = (e) => {
+  loadingImg.value = true;
   img.value = e.target.files[0];
   // Create a storage reference from our storage service
   const file = img.value;
@@ -73,6 +75,7 @@ const onFileChange = (e) => {
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log("File available at", downloadURL);
         imgUrl.value = downloadURL;
+        loadingImg.value = false;
       });
     }
   );
@@ -158,8 +161,16 @@ const addPost = async () => {
         <label
           for="file"
           class="flex justify-center items-center w-[86px] h-[86px] bg-[#d2d5da] text-white text-4xl rounded-lg"
-          >+</label
         >
+          <template v-if="loadingImg">
+            <img
+              src="/img/loading.png"
+              alt="loading Image"
+              class="animate-spin"
+            />
+          </template>
+          <template v-else> + </template>
+        </label>
         <div
           class="img-preview w-[86px] h-[86px] bg-center bg-cover bg-[#d2d5da] rounded-lg relative"
           v-if="imgUrl.length"

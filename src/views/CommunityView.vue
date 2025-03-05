@@ -8,13 +8,16 @@ import PostButton from "@/components/community/PostButton.vue";
 import { db } from "@/firebase/initializeFirebase";
 import { collection, onSnapshot } from "firebase/firestore";
 
-const posts = ref(postsData);
+// const posts = ref(postsData);
+const posts = ref([]);
 const curCategory = ref("All");
 const handleUpdateCategory = (category) => {
   curCategory.value = category;
 };
+const loadingPosts = ref(false);
 
 onMounted(() => {
+  loadingPosts.value = true;
   onSnapshot(collection(db, "posts"), (querySnapshot) => {
     const fbPosts = [];
     querySnapshot.forEach((doc) => {
@@ -32,6 +35,7 @@ onMounted(() => {
       // console.log(doc.id, "=>", doc.data());
     });
     posts.value = fbPosts;
+    loadingPosts.value = false;
   });
 });
 </script>
@@ -46,6 +50,7 @@ onMounted(() => {
           ? posts
           : posts.filter((post) => post.category === curCategory)
       "
+      :loadingPosts="loadingPosts"
     />
     <PostButton />
   </div>
