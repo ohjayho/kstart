@@ -12,7 +12,7 @@ export function formatTimeAgo(fbSeconds) {
     return `${seconds} second ago`;
   } else if (seconds < 60) {
     return `${seconds} seconds ago`;
-  } else if (seconds === 60) {
+  } else if (seconds < 120) {
     return `1 minute ago`;
   } else if (seconds < 3600) {
     const minutes = Math.floor(seconds / 60);
