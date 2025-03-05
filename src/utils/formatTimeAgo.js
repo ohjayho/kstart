@@ -8,8 +8,8 @@ export function formatTimeAgo(fbSeconds) {
   // console.log(date, now);
   const seconds = Math.floor((now - date) / 1000);
 
-  if (seconds === 1) {
-    return `1 second ago`;
+  if (seconds === 1 || seconds === 0) {
+    return `${seconds} second ago`;
   } else if (seconds < 60) {
     return `${seconds} seconds ago`;
   } else if (seconds === 60) {
