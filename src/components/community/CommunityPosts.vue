@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import CommunityCategoryBadge from "./CommunityCategoryBadge.vue";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/initializeFirebase";
 import Loading from "../Loading.vue";
@@ -13,10 +13,12 @@ const props = defineProps({
 });
 
 const posts = ref([]);
-const filteredPosts =
-  props.curCategory === "All"
-    ? posts
-    : posts.filter((post) => post.category === props.curCategory);
+
+const filteredPosts = computed(() => {
+  return props.curCategory === "All"
+    ? posts.value
+    : posts.value.filter((post) => post.category === props.curCategory);
+});
 
 const router = useRouter();
 
@@ -66,7 +68,7 @@ onMounted(() => {
   >
     <Loading />
   </div>
-  <div v-if="!posts.length && !loadingPosts" class="posts-empty mt-5">
+  <div v-if="!filteredPosts.length && !loadingPosts" class="posts-empty mt-5">
     <h1 class="text-center text-[#6d7280]">게시글이 없습니다.</h1>
   </div>
   <div
