@@ -8,8 +8,7 @@ import { useAuth } from "@/firebase/checkAuth";
 import { auth } from "@/firebase/initializeFirebase";
 
 const router = useRouter();
-
-const { username, isLoggedIn } = useAuth();
+const { nickname, isLoggedIn } = useAuth();
 
 const onSignOut = () => {
   signOut(auth)
@@ -22,6 +21,12 @@ const onSignOut = () => {
       alert(err);
     });
 };
+
+const toLoginPage = () => {
+  if (!isLoggedIn.value) {
+    router.push("/login");
+  }
+};
 </script>
 
 <template>
@@ -33,13 +38,13 @@ const onSignOut = () => {
         alt="user-picture"
         class="w-14 h-14 rounded-full mr-3"
       />
-      <RouterLink
-        to="/login"
+      <p
+        @click="toLoginPage"
         class="user-name mr-3 text-lg h-full"
         :class="{ underline: !isLoggedIn, 'text-[#9ca3af]': !isLoggedIn }"
       >
-        {{ username }}
-      </RouterLink>
+        {{ nickname }}
+      </p>
       <button v-if="isLoggedIn" class="user-edit">
         <img src="/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
