@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import SubHeader from "@/components/SubHeader.vue";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile
+} from "firebase/auth";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
+const nickname = ref("");
 const email = ref("");
 const password = ref("");
 const passwordAgain = ref("");
@@ -12,10 +17,13 @@ const router = useRouter();
 const auth = getAuth();
 const signUp = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       const user = userCredential.user;
+      await updateProfile(user, { displayName: nickname.value });
       console.log("Sucessfully registered!");
       alert("가입이 완료되었습니다!\n로그인 하세요.");
+      await auth.signOut();
+      //displayName 적용을 위한 시간끌기용. onAuthStateChanged가 빠르게 감지하기 때문에 문제 발생
       router.push("/login");
     })
     .catch((err) => {
@@ -30,7 +38,13 @@ const signUp = () => {
   <div
     class="login_container h-full pt-[60px] pb-[70px] px-5 flex flex-col items-center relative"
   >
-    <form class="flex flex-col justify-between w-full h-[196px] mt-10">
+    <form class="flex flex-col justify-between w-full h-[248px] mt-10">
+      <input
+        type="text"
+        placeholder="닉네임을 입력해 주세요."
+        class="signup_input"
+        v-model="nickname"
+      />
       <input
         type="email"
         placeholder="e-mail을 입력해 주세요."
