@@ -1,23 +1,30 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./initializeFirebase";
+import { auth, db } from "./initializeFirebase";
 import { ref } from "vue";
+import { doc, getDoc } from "firebase/firestore";
 
 const isLoggedIn = ref(false);
-const username = ref("로그인 해주세요.");
+const userEmail = ref(null);
+const nickname = ref("로그인 해주세요.");
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     isLoggedIn.value = true;
-    username.value = user.providerData[0].uid;
+    userEmail.value = user.email;
+    nickname.value = user.displayName;
+    // userEmail.value = user.providerData[0].uid;
+    // nickname.value = user.providerData[0].displayName;
   } else {
     isLoggedIn.value = false;
-    username.value = "로그인 해주세요.";
+    userEmail.value = null;
+    nickname.value = "로그인 해주세요.";
   }
 });
 
-export function useAuth() {
+export function useAuth(nick) {
   return {
     isLoggedIn,
-    username
+    userEmail,
+    nickname
   };
 }
