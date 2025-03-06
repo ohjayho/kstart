@@ -66,7 +66,7 @@ onMounted(() => {
         id: doc.id,
         author: doc.data().author,
         comment: doc.data().comment,
-        date: doc.data().date.seconds,
+        date: doc.data().date?.seconds,
         postId: doc.data().postId
       };
       foundComments.push(foundComment);
