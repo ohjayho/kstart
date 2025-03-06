@@ -38,13 +38,14 @@ const toLoginPage = () => {
         alt="user-picture"
         class="w-14 h-14 rounded-full mr-3"
       />
-      <p
+      <button
         @click="toLoginPage"
         class="user-name mr-3 text-lg h-full"
         :class="{ underline: !isLoggedIn, 'text-[#9ca3af]': !isLoggedIn }"
+        :disabled="isLoggedIn"
       >
         {{ nickname }}
-      </p>
+      </button>
       <button v-if="isLoggedIn" class="user-edit">
         <img src="/img/setting/user-edit.png" alt="" class="w-6" />
       </button>
