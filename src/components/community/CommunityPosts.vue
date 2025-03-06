@@ -3,35 +3,60 @@ import { useRouter } from "vue-router";
 import CommunityCategoryBadge from "./CommunityCategoryBadge.vue";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
-import { computed } from "vue";
+import { onMounted, ref } from "vue";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/firebase/initializeFirebase";
+import Loading from "../Loading.vue";
 
 const props = defineProps({
-  posts: Array,
-  loadingPosts: Boolean
+  curCategory: String
 });
 
-const sortedPosts = computed(() => {
-  return [...props.posts].sort((a, b) => {
-    return b.date?.seconds - a.date?.seconds;
-  });
-});
+const posts = ref([]);
+const filteredPosts =
+  props.curCategory === "All"
+    ? posts
+    : posts.filter((post) => post.category === props.curCategory);
 
 const router = useRouter();
+
+const loadingPosts = ref(false);
+
 const goToDetail = (post) => {
   router.push({
-    path: "/community/1",
+    path: `/community/${post.id}`,
     query: {
-      user: post.user,
-      date: formatTimeAgo(post.date.seconds),
-      category: post.category,
-      title: post.title,
-      description: post.description,
-      img: post.img,
-      likes: post.likes,
-      comments: post.comments
+      id: post.id
     }
   });
 };
+
+onMounted(() => {
+  loadingPosts.value = true;
+  onSnapshot(collection(db, "posts"), (querySnapshot) => {
+    const fbPosts = [];
+    querySnapshot.forEach((doc) => {
+      const post = {
+        id: doc.id,
+        user: doc.data().user,
+        date: doc.data().date,
+        category: doc.data().category,
+        title: doc.data().title,
+        description: doc.data().description,
+        img: doc.data().img,
+        likes: doc.data().likes,
+        comments: doc.data().commentCount
+      };
+      fbPosts.push(post);
+      // console.log(doc.id, "=>", doc.data());
+    });
+    const sortedPosts = fbPosts.sort((a, b) => {
+      return b.date?.seconds - a.date?.seconds;
+    });
+    posts.value = sortedPosts;
+    loadingPosts.value = false;
+  });
+});
 </script>
 
 <template>
@@ -39,13 +64,13 @@ const goToDetail = (post) => {
     v-if="loadingPosts"
     class="posts-loading flex justify-center items-center mt-5"
   >
-    <img src="/img/loading.png" alt="loading" class="animate-spin" />
+    <Loading />
   </div>
-  <div v-if="!sortedPosts.length && !loadingPosts" class="posts-empty mt-5">
+  <div v-if="!posts.length && !loadingPosts" class="posts-empty mt-5">
     <h1 class="text-center text-[#6d7280]">게시글이 없습니다.</h1>
   </div>
   <div
-    v-for="post in sortedPosts"
+    v-for="post in filteredPosts"
     class="post-container py-4 border-t border-b border-gray"
     @click="goToDetail(post)"
   >

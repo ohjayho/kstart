@@ -3,55 +3,22 @@ import CommunityCategories from "@/components/community/CommunityCategories.vue"
 import CommunityPosts from "@/components/community/CommunityPosts.vue";
 import SearchBar from "@/components/community/SearchBar.vue";
 import postsData from "@/assets/postsData.json";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import PostButton from "@/components/community/PostButton.vue";
-import { db } from "@/firebase/initializeFirebase";
-import { collection, onSnapshot } from "firebase/firestore";
 
 // const posts = ref(postsData);
-const posts = ref([]);
+
 const curCategory = ref("All");
 const handleUpdateCategory = (category) => {
   curCategory.value = category;
 };
-const loadingPosts = ref(false);
-
-onMounted(() => {
-  loadingPosts.value = true;
-  onSnapshot(collection(db, "posts"), (querySnapshot) => {
-    const fbPosts = [];
-    querySnapshot.forEach((doc) => {
-      const post = {
-        user: doc.data().user,
-        date: doc.data().date,
-        category: doc.data().category,
-        title: doc.data().title,
-        description: doc.data().description,
-        img: doc.data().img,
-        likes: doc.data().likes,
-        comments: doc.data().comments
-      };
-      fbPosts.push(post);
-      // console.log(doc.id, "=>", doc.data());
-    });
-    posts.value = fbPosts;
-    loadingPosts.value = false;
-  });
-});
 </script>
 
 <template>
   <div class="community-view-container pb-[70px] relative px-4">
     <SearchBar />
     <CommunityCategories @updateCategory="handleUpdateCategory" />
-    <CommunityPosts
-      :posts="
-        curCategory === 'All'
-          ? posts
-          : posts.filter((post) => post.category === curCategory)
-      "
-      :loadingPosts="loadingPosts"
-    />
+    <CommunityPosts :curCategory="curCategory" />
     <PostButton />
   </div>
 </template>
