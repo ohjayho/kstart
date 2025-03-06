@@ -4,7 +4,7 @@ import SubHeader from "@/components/SubHeader.vue";
 
 <template>
   <SubHeader title="시작하기" />
-  <div class="login_container pt-[60px] flex flex-col items-center">
+  <div class="login_container px-4 pt-[60px] flex flex-col items-center">
     <div class="logo_wrapper flex items-center my-[138px]">
       <img src="/img/logo.png" alt="logo" class="h-12" />
     </div>
