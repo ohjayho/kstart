@@ -5,8 +5,10 @@ import {
   collection,
   deleteDoc,
   doc,
+  increment,
   onSnapshot,
   query,
+  updateDoc,
   where
 } from "firebase/firestore";
 import { onMounted, ref } from "vue";
@@ -46,6 +48,10 @@ const onDeleteComment = async (commentId) => {
   try {
     const docRef = doc(db, "comments", commentId);
     await deleteDoc(docRef);
+    const postRef = doc(db, "posts", props.postId);
+    await updateDoc(postRef, {
+      commentCount: increment(-1)
+    });
     alert("댓글이 삭제됐습니다.");
   } catch (error) {
     alert("댓글 삭제를 실패했습니다.");
