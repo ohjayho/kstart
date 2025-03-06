@@ -1,6 +1,7 @@
 <script setup>
 import SubHeader from "@/components/SubHeader.vue";
 import CommunityCategories from "@/components/community/CommunityCategories.vue";
+import Loading from "@/components/Loading.vue";
 import { ref } from "vue";
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -20,7 +21,7 @@ const text = ref("");
 const img = ref(null);
 const fileKey = ref(0);
 const imgUrl = ref("");
-const { username } = useAuth();
+const { nickname } = useAuth();
 const router = useRouter();
 const loadingImg = ref(false);
 
@@ -33,9 +34,7 @@ const onFileChange = (e) => {
   img.value = e.target.files[0];
   // Create a storage reference from our storage service
   const file = img.value;
-  const storageRef = firebaseRef(storage, `images/${img.value}`); // Replace with your desired path
-  // Create the file metadata
-
+  const storageRef = firebaseRef(storage, `images/${img.value.lastModified}`);
   // Upload the file
   const uploadTask = uploadBytesResumable(storageRef, file); // file is your File object
 
@@ -83,13 +82,13 @@ const onFileChange = (e) => {
 
 const onDeleteFile = () => {
   // Create a reference to the file to delete
-  const desertRef = firebaseRef(storage, `images/${img.value}`);
+  const desertRef = firebaseRef(storage, `images/${img.value.lastModified}`);
 
   // Delete the file
   deleteObject(desertRef)
     .then(() => {
       // File deleted successfully
-      console.log(`${img.value.name} 삭제 완료`);
+      console.log(`${img.value.lastModified} 삭제 완료`);
       img.value = null;
       imgUrl.value = "";
       fileKey.value += 1;
@@ -97,7 +96,7 @@ const onDeleteFile = () => {
     })
     .catch((error) => {
       // Uh-oh, an error occurred!
-      console.log(`${img.value.name} 삭제 실패!`);
+      console.log(`${img.value.lastModified} 삭제 실패!`);
     });
 };
 
@@ -117,14 +116,15 @@ const addPost = async () => {
 
   try {
     const docRef = await addDoc(collection(db, "posts"), {
-      user: username.value,
+      user: nickname.value,
+
       date: serverTimestamp(),
       category: category.value,
       title: title.value,
       description: text.value,
       img: imgUrl.value,
-      likes: 3,
-      comments: 5
+      likes: 0,
+      comments: 0
     });
     // console.log("Document written with ID: ", docRef.id);
     alert("게시글이 등록됐습니다.");
