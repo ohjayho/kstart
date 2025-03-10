@@ -3,10 +3,12 @@ import { useRouter } from "vue-router";
 import CommunityCategoryBadge from "./CommunityCategoryBadge.vue";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, watchEffect } from "vue";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/initializeFirebase";
 import Loading from "../Loading.vue";
+import { useAuth } from "@/firebase/checkAuth";
+import CommunityPostPopup from "./CommunityPostPopup.vue";
 
 const props = defineProps({
   curCategory: String
@@ -14,10 +16,18 @@ const props = defineProps({
 
 const posts = ref([]);
 
+const { isLoggedIn, nickname } = useAuth();
+
 const filteredPosts = computed(() => {
   return props.curCategory === "All"
     ? posts.value
     : posts.value.filter((post) => post.category === props.curCategory);
+});
+
+const popups = ref([]);
+
+watchEffect(() => {
+  popups.value = filteredPosts.value.map(() => false);
 });
 
 const router = useRouter();
@@ -31,6 +41,24 @@ const goToDetail = (post) => {
       id: post.id
     }
   });
+};
+
+const togglePopup = (idx, e) => {
+  e.stopPropagation();
+  popups.value[idx] = !popups.value[idx];
+  activePopup.value = popups.value[idx] ? idx : null;
+};
+
+const activePopup = ref(null);
+
+const handleClickOutside = (e) => {
+  if (activePopup.value !== null) {
+    const popupElement = document.querySelector(".post-popup");
+    if (popupElement && !popupElement.contains(e.target)) {
+      popups.value[activePopup.value] = false;
+      activePopup.value = null;
+    }
+  }
 };
 
 onMounted(() => {
@@ -58,6 +86,11 @@ onMounted(() => {
     posts.value = sortedPosts;
     loadingPosts.value = false;
   });
+  document.addEventListener("click", handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
 
@@ -72,13 +105,21 @@ onMounted(() => {
     <h1 class="text-center text-[#6d7280]">게시글이 없습니다.</h1>
   </div>
   <div
-    v-for="post in filteredPosts"
+    v-for="(post, idx) in filteredPosts"
+    :key="post.id"
     class="post-container py-4 border-t border-b border-gray"
     @click="goToDetail(post)"
   >
     <div class="post-header mb-2 flex items-center justify-between">
       <CommunityCategoryBadge :text="post.category" />
-      <span>···</span>
+      <button
+        v-if="isLoggedIn && nickname === post.user"
+        @click="togglePopup(idx, $event)"
+        class="relative"
+      >
+        <span>···</span>
+        <CommunityPostPopup v-if="popups[idx]" />
+      </button>
       <div class="more hidden">
         <div class="report-container">Report</div>
         <div class="hide-container">Block User</div>
