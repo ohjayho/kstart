@@ -1,5 +1,5 @@
 import BenefitView from "@/views/BenefitView.vue";
-import CommunityAddPostView from "@/views/CommunityAddPostView.vue";
+import CommunityNewPostView from "@/views/CommunityNewPostView.vue";
 import CommunityPostDetailView from "@/views/CommunityPostDetailView.vue";
 import CommunityView from "@/views/CommunityView.vue";
 import HomeView from "@/views/HomeView.vue";
@@ -39,9 +39,14 @@ const router = createRouter({
       component: CommunityView
     },
     {
-      path: "/post",
-      name: "post",
-      component: CommunityAddPostView
+      path: "/newPost",
+      name: "newPost",
+      component: CommunityNewPostView
+    },
+    {
+      path: "/newPost/:postId",
+      name: "newPost/postId",
+      component: CommunityNewPostView
     },
     {
       path: "/benefit",
@@ -59,7 +64,7 @@ const router = createRouter({
       component: InboxView
     },
     {
-      path: "/community/:id",
+      path: "/community/:postId",
       component: CommunityPostDetailView
     }
   ],
