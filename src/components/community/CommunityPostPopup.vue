@@ -11,6 +11,7 @@ const router = useRouter();
 
 const handlePostDelete = async () => {
   await deleteDoc(doc(db, "posts", props.postId));
+  router.push("/community");
 };
 
 const handlePostEdit = async () => {
