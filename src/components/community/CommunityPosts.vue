@@ -118,7 +118,7 @@ onUnmounted(() => {
         class="relative"
       >
         <span>···</span>
-        <CommunityPostPopup v-if="popups[idx]" />
+        <CommunityPostPopup v-if="popups[idx]" :postId="post.id" />
       </button>
       <div class="more hidden">
         <div class="report-container">Report</div>
