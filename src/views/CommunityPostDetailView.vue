@@ -32,7 +32,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <CommunityPostHeader />
+  <CommunityPostHeader :postId="postId" />
   <div class="community-post-detail-container pb-[70px] px-4 relative">
     <div class="user-info flex items-center mt-3 mb-3">
       <img
@@ -54,8 +54,8 @@ onMounted(() => {
     <p class="mb-3">{{ post.description }}</p>
     <Loading v-if="loadingPost" />
     <img
-      v-if="post.img"
-      :src="post.img"
+      v-if="post.imgUrl"
+      :src="post.imgUrl"
       alt=""
       class="post-image w-full h-full"
     />
