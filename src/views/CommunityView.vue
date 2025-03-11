@@ -1,10 +1,10 @@
 <script setup>
 import CommunityCategories from "@/components/community/CommunityCategories.vue";
 import CommunityPosts from "@/components/community/CommunityPosts.vue";
+import NewPostButton from "@/components/community/NewPostButton.vue";
 import SearchBar from "@/components/community/SearchBar.vue";
-import postsData from "@/assets/postsData.json";
+// import postsData from "@/assets/postsData.json";
 import { ref } from "vue";
-import PostButton from "@/components/community/PostButton.vue";
 
 // const posts = ref(postsData);
 
@@ -19,6 +19,6 @@ const handleUpdateCategory = (category) => {
     <SearchBar />
     <CommunityCategories @updateCategory="handleUpdateCategory" />
     <CommunityPosts :curCategory="curCategory" />
-    <PostButton />
+    <NewPostButton />
   </div>
 </template>
