@@ -9,7 +9,7 @@ const addPost = () => {
     alert("로그인 해주세요.");
     router.push("/login");
   } else {
-    router.push("/post");
+    router.push("/newPost");
   }
 };
 </script>
