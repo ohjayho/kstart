@@ -2,9 +2,15 @@
 import SubHeader from "@/components/SubHeader.vue";
 import CommunityCategories from "@/components/community/CommunityCategories.vue";
 import Loading from "@/components/Loading.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  onSnapshot
+} from "firebase/firestore";
 import { useAuth } from "@/firebase/checkAuth";
 import { db, storage } from "@/firebase/initializeFirebase";
 import {
@@ -13,17 +19,23 @@ import {
   getDownloadURL,
   deleteObject
 } from "firebase/storage";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { formatTimeAgo } from "@/utils/formatTimeAgo";
 
 const category = ref("Photo Contest");
 const title = ref("");
-const text = ref("");
+const description = ref("");
 const img = ref(null);
 const fileKey = ref(0);
 const imgUrl = ref("");
 const { nickname } = useAuth();
+const route = useRoute();
 const router = useRouter();
 const loadingImg = ref(false);
+const loadingPost = ref(false);
+const postId = route.params.postId;
+const post = ref({});
+const isEditing = ref(false);
 
 const handleUpdateCategory = (newCategory) => {
   category.value = newCategory;
@@ -109,22 +121,22 @@ const addPost = async () => {
     alert("제목을 입력해 주세요.");
     return;
   }
-  if (!text.value) {
+  if (!description.value) {
     alert("내용을 입력해 주세요.");
     return;
   }
 
   try {
     const docRef = await addDoc(collection(db, "posts"), {
-      user: nickname.value,
-
-      date: serverTimestamp(),
       category: category.value,
-      title: title.value,
-      description: text.value,
+      comments: 0,
+      date: serverTimestamp(),
+      description: description.value,
       img: imgUrl.value,
       likes: 0,
-      comments: 0
+      postId: docRef.id,
+      title: title.value,
+      user: nickname.value
     });
     // console.log("Document written with ID: ", docRef.id);
     alert("게시글이 등록됐습니다.");
@@ -134,6 +146,26 @@ const addPost = async () => {
   }
   // Add a new document with a generated id.
 };
+
+onMounted(() => {
+  if (postId) {
+    isEditing.value = true;
+    loadingPost.value = true;
+    loadingImg.value = true;
+    const docRef = doc(db, "posts", postId);
+    onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        title.value = data.title;
+        description.value = data.description;
+        imgUrl.value = data.img;
+        console.log(title.value, description.value, imgUrl.value);
+      }
+      loadingPost.value = false;
+      loadingImg.value = false;
+    });
+  }
+});
 </script>
 
 <template>
@@ -154,8 +186,8 @@ const addPost = async () => {
     />
     <textarea
       class="w-full h-[300px] p-5 border border-[rgb(210, 213, 218)] rounded-lg outline-none mt-5"
-      placeholder="Text"
-      v-model="text"
+      placeholder="Description"
+      v-model="description"
     ></textarea>
     <div class="upload-image flex flex-col w-full items-start mt-5">
       <h2>사진 첨부</h2>
@@ -169,11 +201,11 @@ const addPost = async () => {
         </label>
         <div
           class="img-preview w-[86px] h-[86px] bg-center bg-cover bg-[#d2d5da] rounded-lg relative"
-          v-if="imgUrl.length"
+          v-if="imgUrl?.length"
           :style="{ backgroundImage: `url(${imgUrl})` }"
         >
           <button
-            v-if="img"
+            v-if="imgUrl"
             @click="onDeleteFile"
             class="absolute flex justify-center items-center w-5 h-5 rounded-full bg-[rgba(0,0,0,0.3)] top-1 right-1 text-white text-xs"
           >
@@ -193,9 +225,10 @@ const addPost = async () => {
     <button
       class="post-submit-btn mt-10"
       :style="{
-        backgroundColor: category && text.length > 0 ? '#2760ee' : '#d2d5da'
+        backgroundColor:
+          category && description.length > 0 ? '#2760ee' : '#d2d5da'
       }"
-      :disabled="category && text.length > 0 ? false : true"
+      :disabled="category && description.length > 0 ? false : true"
       @click="addPost"
     >
       게시
