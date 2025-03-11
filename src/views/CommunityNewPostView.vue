@@ -9,7 +9,9 @@ import {
   addDoc,
   serverTimestamp,
   doc,
-  onSnapshot
+  onSnapshot,
+  setDoc,
+  updateDoc
 } from "firebase/firestore";
 import { useAuth } from "@/firebase/checkAuth";
 import { db, storage } from "@/firebase/initializeFirebase";
@@ -20,12 +22,12 @@ import {
   deleteObject
 } from "firebase/storage";
 import { useRoute, useRouter } from "vue-router";
-import { formatTimeAgo } from "@/utils/formatTimeAgo";
 
 const category = ref("Photo Contest");
 const title = ref("");
 const description = ref("");
-const img = ref(null);
+const imgName = ref("");
+const imgFile = ref(null);
 const fileKey = ref(0);
 const imgUrl = ref("");
 const { nickname } = useAuth();
@@ -34,19 +36,24 @@ const router = useRouter();
 const loadingImg = ref(false);
 const loadingPost = ref(false);
 const postId = route.params.postId;
-const post = ref({});
+
 const isEditing = ref(false);
 
 const handleUpdateCategory = (newCategory) => {
   category.value = newCategory;
 };
 
-const onFileChange = (e) => {
+const onFileChange = async (e) => {
+  if (imgName.value !== "") {
+    await onDeleteFile();
+  }
   loadingImg.value = true;
-  img.value = e.target.files[0];
+  imgFile.value = e.target.files[0];
   // Create a storage reference from our storage service
-  const file = img.value;
-  const storageRef = firebaseRef(storage, `images/${img.value.lastModified}`);
+  const file = imgFile.value;
+  imgName.value = Date.now();
+  const storageRef = firebaseRef(storage, `images/${imgName.value}`);
+
   // Upload the file
   const uploadTask = uploadBytesResumable(storageRef, file); // file is your File object
 
@@ -92,23 +99,23 @@ const onFileChange = (e) => {
   );
 };
 
-const onDeleteFile = () => {
+const onDeleteFile = async () => {
   // Create a reference to the file to delete
-  const desertRef = firebaseRef(storage, `images/${img.value.lastModified}`);
+  const desertRef = firebaseRef(storage, `images/${imgName.value}`);
 
-  // Delete the file
-  deleteObject(desertRef)
+  // Delete the file (addded return to put await in onFileChange)
+  return deleteObject(desertRef)
     .then(() => {
       // File deleted successfully
-      console.log(`${img.value.lastModified} 삭제 완료`);
-      img.value = null;
+      console.log(`${imgName.value} 삭제 완료`);
+      imgName.value = "";
       imgUrl.value = "";
       fileKey.value += 1;
       //
     })
     .catch((error) => {
       // Uh-oh, an error occurred!
-      console.log(`${img.value.lastModified} 삭제 실패!`);
+      console.log(`${imgName.value} 삭제 실패!`);
     });
 };
 
@@ -127,12 +134,14 @@ const addPost = async () => {
   }
 
   try {
-    const docRef = await addDoc(collection(db, "posts"), {
+    const docRef = await addDoc(collection(db, "posts"), {});
+    await setDoc(docRef, {
       category: category.value,
       comments: 0,
       date: serverTimestamp(),
       description: description.value,
-      img: imgUrl.value,
+      imgUrl: imgUrl.value,
+      imgName: imgName.value,
       likes: 0,
       postId: docRef.id,
       title: title.value,
@@ -143,8 +152,46 @@ const addPost = async () => {
     router.push("/community");
   } catch (error) {
     alert("게시글 작성을 실패했습니다.");
+    console.log(error);
   }
   // Add a new document with a generated id.
+};
+
+const updatePost = async () => {
+  if (!category.value) {
+    alert("카테고리를 설정해 주세요.");
+    return;
+  }
+  if (!title.value) {
+    alert("제목을 입력해 주세요.");
+    return;
+  }
+  if (!description.value) {
+    alert("내용을 입력해 주세요.");
+    return;
+  }
+
+  try {
+    const docRef = doc(db, "posts", postId);
+    await updateDoc(docRef, {
+      category: category.value,
+      description: description.value,
+      imgUrl: imgUrl.value,
+      imgName: imgName.value,
+      title: title.value
+    });
+    // console.log("Document written with ID: ", docRef.id);
+    alert("게시글이 수정됐습니다.");
+    router.push("/community");
+  } catch (error) {
+    alert("게시글 수정을 실패했습니다.");
+    console.log(error);
+  }
+  // Add a new document with a generated id.
+};
+
+const handleSubmit = () => {
+  isEditing.value ? updatePost() : addPost();
 };
 
 onMounted(() => {
@@ -158,8 +205,15 @@ onMounted(() => {
         const data = docSnap.data();
         title.value = data.title;
         description.value = data.description;
-        imgUrl.value = data.img;
-        console.log(title.value, description.value, imgUrl.value);
+        imgUrl.value = data.imgUrl;
+        imgName.value = data.imgName;
+        console.log(
+          title.value,
+          description.value,
+          imgUrl.value,
+          imgName.value,
+          "밸류들"
+        );
       }
       loadingPost.value = false;
       loadingImg.value = false;
@@ -229,7 +283,7 @@ onMounted(() => {
           category && description.length > 0 ? '#2760ee' : '#d2d5da'
       }"
       :disabled="category && description.length > 0 ? false : true"
-      @click="addPost"
+      @click="handleSubmit"
     >
       게시
     </button>
