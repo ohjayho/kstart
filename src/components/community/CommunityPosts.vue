@@ -73,7 +73,7 @@ onMounted(() => {
         category: doc.data().category,
         title: doc.data().title,
         description: doc.data().description,
-        img: doc.data().img,
+        img: doc.data().imgUrl,
         likes: doc.data().likes,
         comments: doc.data().commentCount
       };
